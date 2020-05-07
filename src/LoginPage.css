@@ -36,7 +36,11 @@
 }
 
 span {
-  background-image: linear-gradient(to right, red, yellow);
+  background-image: linear-gradient(
+    to right,
+    rgb(170, 70, 70),
+    rgb(182, 182, 95)
+  );
   font-family: Montserrat-Italic;
   border-radius: 10px;
 }
@@ -78,24 +82,37 @@ span {
 
 .loginContainer > .ErrorMessage {
   display: flex;
-  align-self: flex-start;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
   margin-left: 10px;
   font-family: Montserrat-Thin;
   color: red;
   font-size: 14px;
+  max-width: 340px;
+  word-wrap: break-word;
+}
+
+.loginContainer > .ErrorMessage > h4 {
+  display: flex;
+  margin-top: 5px;
 }
 
 .loginContainer > .ButtonSend > button {
   display: flex;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 20px;
   width: 340px;
   height: 50px;
   border-radius: 10px;
   outline: none;
   color: white;
   border-width: 0px;
-  background-image: linear-gradient(to left, red, yellow);
+  background-image: linear-gradient(
+    to left,
+    rgb(170, 70, 70),
+    rgb(182, 182, 95)
+  );
   font-family: Montserrat-Regular;
 }
 
@@ -116,10 +133,10 @@ span {
   outline: none;
   border-width: 0px;
   background-color: transparent;
-  color: yellow;
+  color: rgb(182, 182, 95);
   font-size: 12px;
   font-family: Montserrat-Regular;
-  border: 1px solid rgb(194, 157, 84);
+  border: 1px solid rgb(182, 182, 95);
 }
 
 .loginContainer > div > .ClearImage {
@@ -127,9 +144,4 @@ span {
   width: 15px;
   height: 15px;
   padding-right: 10px;
-}
-
-.loginContainer > div > h4 {
-  display: flex;
-  align-self: center;
 }

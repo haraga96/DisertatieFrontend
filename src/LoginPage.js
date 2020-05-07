@@ -6,23 +6,23 @@ import { navigate } from "@reach/router";
 function LoginPage() {
   const [emailAddress, updateEmailAddress] = useState("", "");
   const [password, updatePassword] = useState("", "");
-  const [errorMessage, setErrorMessage] = useState("", "");
+  const [errorMessage, setErrorMessage] = useState([], []);
 
   function EmailAddressChanged(value) {
-    setErrorMessage("");
+    setErrorMessage([]);
     updateEmailAddress(value);
   }
   function PasswordChanged(value) {
-    setErrorMessage("");
+    setErrorMessage([]);
     updatePassword(value);
   }
 
   function ClearEmailAddress() {
-    setErrorMessage("");
+    setErrorMessage([]);
     updateEmailAddress("");
   }
   function ClearPassword() {
-    setErrorMessage("");
+    setErrorMessage([]);
     updatePassword("");
   }
 
@@ -38,11 +38,12 @@ function LoginPage() {
       })
       .then(function (response) {
         console.log(response);
-        setErrorMessage("");
+        setErrorMessage([]);
       })
       .catch(function (error) {
-        console.log(error.response.data);
-        setErrorMessage("*" + error.response.data);
+        var sentence = error.response.data.split("*");
+        console.log(sentence);
+        setErrorMessage(sentence);
       });
   }
 
@@ -64,7 +65,7 @@ function LoginPage() {
             className="ClearImage"
             type="image"
             alt="Clear"
-            src="https://img.icons8.com/ios/50/000000/circled-x.png"
+            src="https://img.icons8.com/ios/16/000000/close-window.png"
             onClick={() => ClearEmailAddress()}
             title="Clear text"
           />
@@ -80,13 +81,15 @@ function LoginPage() {
             className="ClearImage"
             type="image"
             alt="Clear"
-            src="https://img.icons8.com/ios/50/000000/circled-x.png"
+            src="https://img.icons8.com/ios/16/000000/close-window.png"
             onClick={() => ClearPassword()}
             title="Clear text"
           />
         </div>
         <div className="ErrorMessage">
-          <h4>{errorMessage}</h4>
+          {errorMessage.map(function (val, index) {
+            return <h4 key={index}>{val}</h4>;
+          })}
         </div>
         <div className="ButtonSend">
           <button type="submit" onClick={() => SendCall()}>

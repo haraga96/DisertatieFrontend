@@ -3,15 +3,15 @@ import "./ForgotPasswordPage.css";
 
 function ForgotPasswordPage() {
   const [emailAddress, updateEmailAddress] = useState("", "");
-  const [errorMessage, setErrorMessage] = useState("", "");
+  const [errorMessage, setErrorMessage] = useState([], []);
 
   function EmailAddressChanged(value) {
-    setErrorMessage("");
+    setErrorMessage([]);
     updateEmailAddress(value);
   }
 
   function ClearEmailAddress() {
-    setErrorMessage("");
+    setErrorMessage([]);
     updateEmailAddress("");
   }
 
@@ -25,13 +25,12 @@ function ForgotPasswordPage() {
       })
       .then(function (response) {
         console.log(response);
-        setErrorMessage("");
+        setErrorMessage([]);
       })
       .catch(function (error) {
-        if (error.response.status !== 404) {
-          console.log(error.response.data);
-          setErrorMessage(error.response.data);
-        }
+        var sentence = error.response.data.split("*");
+        console.log(sentence);
+        setErrorMessage(sentence);
       });
   }
 
@@ -44,20 +43,22 @@ function ForgotPasswordPage() {
         <div className="LoginInputs">
           <input
             value={emailAddress}
-            placeholder="Email Address"
+            placeholder="*Email Address"
             onChange={(e) => EmailAddressChanged(e.target.value)}
           ></input>
           <input
             className="ClearImage"
             type="image"
             alt="Clear"
-            src="https://img.icons8.com/ios/50/000000/circled-x.png"
+            src="https://img.icons8.com/ios/16/000000/close-window.png"
             onClick={() => ClearEmailAddress()}
             title="Clear text"
           />
         </div>
         <div className="ErrorMessage">
-          <h4>{errorMessage}</h4>
+          {errorMessage.map(function (val, index) {
+            return <h4 key={index}>{val}</h4>;
+          })}
         </div>
         <div className="ButtonSend">
           <button type="submit" onClick={() => SendCall()}>

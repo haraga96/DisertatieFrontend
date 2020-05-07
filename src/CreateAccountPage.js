@@ -7,55 +7,55 @@ function LoginPage() {
   const [emailAddress, updateEmailAddress] = useState("", "");
   const [password, updatePassword] = useState("", "");
   const [confirmPassword, updateConfirmPassword] = useState("", "");
-  const [errorMessage, setErrorMessage] = useState("", "");
+  const [errorMessage, setErrorMessage] = useState([], []);
 
   function FirstNameChanged(value) {
-    setErrorMessage("");
+    setErrorMessage([]);
     updateFirstName(value);
   }
 
   function LastNameChanged(value) {
-    setErrorMessage("");
+    setErrorMessage([]);
     updateLastName(value);
   }
 
   function EmailAddressChanged(value) {
-    setErrorMessage("");
+    setErrorMessage([]);
     updateEmailAddress(value);
   }
 
   function PasswordChanged(value) {
-    setErrorMessage("");
+    setErrorMessage([]);
     updatePassword(value);
   }
 
   function ConfirmPasswordChanged(value) {
-    setErrorMessage("");
+    setErrorMessage([]);
     updateConfirmPassword(value);
   }
 
   function ClearFirstName() {
-    setErrorMessage("");
+    setErrorMessage([]);
     updateFirstName("");
   }
 
   function ClearLastName() {
-    setErrorMessage("");
+    setErrorMessage([]);
     updateLastName("");
   }
 
   function ClearEmailAddress() {
-    setErrorMessage("");
+    setErrorMessage([]);
     updateEmailAddress("");
   }
 
   function ClearPassword() {
-    setErrorMessage("");
+    setErrorMessage([]);
     updatePassword("");
   }
 
   function ClearConfirmPassword() {
-    setErrorMessage("");
+    setErrorMessage([]);
     updateConfirmPassword("");
   }
 
@@ -71,11 +71,12 @@ function LoginPage() {
       })
       .then(function (response) {
         console.log(response);
-        setErrorMessage("");
+        setErrorMessage([]);
       })
       .catch(function (error) {
-        console.log(error.response.data);
-        setErrorMessage(error.response.data);
+        var sentence = error.response.data.split("*");
+        console.log(sentence);
+        setErrorMessage(sentence);
       });
   }
 
@@ -88,14 +89,14 @@ function LoginPage() {
         <div className="LoginInputs">
           <input
             value={firstName}
-            placeholder="First name"
+            placeholder="*First name"
             onChange={(e) => FirstNameChanged(e.target.value)}
           ></input>
           <input
             className="ClearImage"
             type="image"
             alt="Clear"
-            src="https://img.icons8.com/ios/50/000000/circled-x.png"
+            src="https://img.icons8.com/ios/16/000000/close-window.png"
             onClick={() => ClearFirstName()}
             title="Clear text"
           />
@@ -103,14 +104,14 @@ function LoginPage() {
         <div className="LoginInputs">
           <input
             value={lastName}
-            placeholder="Last name"
+            placeholder="*Last name"
             onChange={(e) => LastNameChanged(e.target.value)}
           ></input>
           <input
             className="ClearImage"
             type="image"
             alt="Clear"
-            src="https://img.icons8.com/ios/50/000000/circled-x.png"
+            src="https://img.icons8.com/ios/16/000000/close-window.png"
             onClick={() => ClearLastName()}
             title="Clear text"
           />
@@ -118,14 +119,14 @@ function LoginPage() {
         <div className="LoginInputs">
           <input
             value={emailAddress}
-            placeholder="Email Address"
+            placeholder="*Email Address"
             onChange={(e) => EmailAddressChanged(e.target.value)}
           ></input>
           <input
             className="ClearImage"
             type="image"
             alt="Clear"
-            src="https://img.icons8.com/ios/50/000000/circled-x.png"
+            src="https://img.icons8.com/ios/16/000000/close-window.png"
             onClick={() => ClearEmailAddress()}
             title="Clear text"
           />
@@ -133,7 +134,7 @@ function LoginPage() {
         <div className="LoginInputs">
           <input
             value={password}
-            placeholder="Password"
+            placeholder="*Password"
             type="password"
             onChange={(e) => PasswordChanged(e.target.value)}
           ></input>
@@ -141,7 +142,7 @@ function LoginPage() {
             className="ClearImage"
             type="image"
             alt="Clear"
-            src="https://img.icons8.com/ios/50/000000/circled-x.png"
+            src="https://img.icons8.com/ios/16/000000/close-window.png"
             onClick={() => ClearPassword()}
             title="Clear text"
           />
@@ -149,7 +150,7 @@ function LoginPage() {
         <div className="LoginInputs">
           <input
             value={confirmPassword}
-            placeholder="Confirm password"
+            placeholder="*Confirm password"
             type="password"
             onChange={(e) => ConfirmPasswordChanged(e.target.value)}
           ></input>
@@ -157,13 +158,15 @@ function LoginPage() {
             className="ClearImage"
             type="image"
             alt="Clear"
-            src="https://img.icons8.com/ios/50/000000/circled-x.png"
+            src="https://img.icons8.com/ios/16/000000/close-window.png"
             onClick={() => ClearConfirmPassword()}
             title="Clear text"
           />
         </div>
         <div className="ErrorMessage">
-          <h4>{errorMessage}</h4>
+          {errorMessage.map(function (val, index) {
+            return <h4 key={index}>{val}</h4>;
+          })}
         </div>
         <div className="ButtonSend">
           <button type="submit" onClick={() => SendCall()}>
