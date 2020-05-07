@@ -1,0 +1,113 @@
+import React, { useState } from "react";
+import "./LoginPage.css";
+
+import { navigate } from "@reach/router";
+
+function LoginPage() {
+  const [emailAddress, updateEmailAddress] = useState("", "");
+  const [password, updatePassword] = useState("", "");
+  const [errorMessage, setErrorMessage] = useState("", "");
+
+  function EmailAddressChanged(value) {
+    setErrorMessage("");
+    updateEmailAddress(value);
+  }
+  function PasswordChanged(value) {
+    setErrorMessage("");
+    updatePassword(value);
+  }
+
+  function ClearEmailAddress() {
+    setErrorMessage("");
+    updateEmailAddress("");
+  }
+  function ClearPassword() {
+    setErrorMessage("");
+    updatePassword("");
+  }
+
+  function SendCall() {
+    const emailEntered = emailAddress;
+    const passwordEntered = password;
+    const axios = require("axios").default;
+
+    axios
+      .post("https://localhost:5001/api/users", {
+        emailAddress: emailEntered,
+        password: passwordEntered,
+      })
+      .then(function (response) {
+        console.log(response);
+        setErrorMessage("");
+      })
+      .catch(function (error) {
+        console.log(error.response.data);
+        setErrorMessage("*" + error.response.data);
+      });
+  }
+
+  return (
+    <div>
+      <div className="loginContainer">
+        <div className="TitlePage">
+          <h1>
+            Log into&nbsp; <span>&nbsp;Tax App&nbsp;</span>
+          </h1>
+        </div>
+        <div className="LoginInputs">
+          <input
+            value={emailAddress}
+            placeholder="Email Address"
+            onChange={(e) => EmailAddressChanged(e.target.value)}
+          ></input>
+          <input
+            className="ClearImage"
+            type="image"
+            alt="Clear"
+            src="https://img.icons8.com/ios/50/000000/circled-x.png"
+            onClick={() => ClearEmailAddress()}
+            title="Clear text"
+          />
+        </div>
+        <div className="LoginInputs">
+          <input
+            value={password}
+            placeholder="Password"
+            type="password"
+            onChange={(e) => PasswordChanged(e.target.value)}
+          ></input>
+          <input
+            className="ClearImage"
+            type="image"
+            alt="Clear"
+            src="https://img.icons8.com/ios/50/000000/circled-x.png"
+            onClick={() => ClearPassword()}
+            title="Clear text"
+          />
+        </div>
+        <div className="ErrorMessage">
+          <h4>{errorMessage}</h4>
+        </div>
+        <div className="ButtonSend">
+          <button type="submit" onClick={() => SendCall()}>
+            Log in
+          </button>
+        </div>
+        <div className="CreationAndForgot">
+          <input
+            type="button"
+            value="Create new account"
+            onClick={() => navigate("/createaccount")}
+          />
+          <input
+            type="button"
+            value="Forgot password"
+            onClick={() => navigate("/forgotpassword")}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default LoginPage;
