@@ -60,23 +60,32 @@ function LoginPage() {
   }
 
   function SendCall() {
-    const emailEntered = emailAddress;
-    const passwordEntered = password;
     const axios = require("axios").default;
-
     axios
       .post("https://localhost:5001/api/users/create", {
-        emailAddress: emailEntered,
-        password: passwordEntered,
+        firstName: firstName,
+        lastName: lastName,
+        emailAddress: emailAddress,
+        password: password,
       })
       .then(function (response) {
         console.log(response);
         setErrorMessage([]);
       })
       .catch(function (error) {
-        var sentence = error.response.data.split("*");
-        console.log(sentence);
-        setErrorMessage(sentence);
+        try {
+          if (
+            error !== null &&
+            error.response !== null &&
+            error.response.data !== null
+          ) {
+            var sentence = error.response.data.split("*");
+            console.log(sentence);
+            setErrorMessage(sentence);
+          }
+        } catch (Exception) {
+          setErrorMessage(["", "Something went wrong."]);
+        }
       });
   }
 

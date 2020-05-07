@@ -20,7 +20,7 @@ function ForgotPasswordPage() {
     const axios = require("axios").default;
 
     axios
-      .post("https://localhost:5001/api/users/forgotpassword", {
+      .post("https://localhost:5001/api/users/forgot", {
         emailAddress: emailEntered,
       })
       .then(function (response) {
@@ -28,9 +28,19 @@ function ForgotPasswordPage() {
         setErrorMessage([]);
       })
       .catch(function (error) {
-        var sentence = error.response.data.split("*");
-        console.log(sentence);
-        setErrorMessage(sentence);
+        try {
+          if (
+            error !== null &&
+            error.response !== null &&
+            error.response.data !== null
+          ) {
+            var sentence = error.response.data.split("*");
+            console.log(sentence);
+            setErrorMessage(sentence);
+          }
+        } catch (Exception) {
+          setErrorMessage(["", "Something went wrong."]);
+        }
       });
   }
 

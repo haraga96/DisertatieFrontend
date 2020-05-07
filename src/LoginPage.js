@@ -32,7 +32,7 @@ function LoginPage() {
     const axios = require("axios").default;
 
     axios
-      .post("https://localhost:5001/api/users", {
+      .post("https://localhost:5001/api/users/login", {
         emailAddress: emailEntered,
         password: passwordEntered,
       })
@@ -41,9 +41,19 @@ function LoginPage() {
         setErrorMessage([]);
       })
       .catch(function (error) {
-        var sentence = error.response.data.split("*");
-        console.log(sentence);
-        setErrorMessage(sentence);
+        try {
+          if (
+            error !== null &&
+            error.response !== null &&
+            error.response.data !== null
+          ) {
+            var sentence = error.response.data.split("*");
+            console.log(sentence);
+            setErrorMessage(sentence);
+          }
+        } catch (Exception) {
+          setErrorMessage(["", "Something went wrong."]);
+        }
       });
   }
 
