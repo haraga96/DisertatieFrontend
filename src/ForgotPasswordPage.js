@@ -65,15 +65,16 @@ function ForgotPasswordPage() {
             title="Clear text"
           />
         </div>
-        <div className="ErrorMessage">
-          {errorMessage.map(function (val, index) {
-            return <h4 key={index}>{val}</h4>;
-          })}
-        </div>
+
         <div className="ButtonSend">
           <button type="submit" onClick={() => SendCall()}>
             Send request
           </button>
+        </div>
+        <div className="ErrorMessage">
+          {errorMessage.map(function (val, index) {
+            return <h4 key={index}>{val}</h4>;
+          })}
         </div>
       </div>
     </div>

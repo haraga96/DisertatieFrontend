@@ -20,7 +20,7 @@
 
 .createAccountContainer {
   width: auto;
-  height: 500px;
+  height: auto;
   min-width: 100px;
   border-radius: 30px;
   background-color: transparent;
@@ -54,6 +54,8 @@
   align-items: center;
   border-bottom: 1px solid rgb(143, 142, 140);
   border-radius: 10px;
+  min-width: 100px;
+  width: 340px;
 }
 
 .createAccountContainer > .LoginInputs > input {
@@ -72,13 +74,14 @@
 }
 
 .createAccountContainer > .ErrorMessage {
+  width: 340px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-start;
   flex-direction: column;
   margin-left: 10px;
   font-family: Montserrat-Thin;
-  color: red;
+  color: rgb(211, 77, 77);
   font-size: 14px;
   max-width: 340px;
   word-wrap: break-word;

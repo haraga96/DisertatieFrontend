@@ -96,11 +96,6 @@ function LoginPage() {
             title="Clear text"
           />
         </div>
-        <div className="ErrorMessage">
-          {errorMessage.map(function (val, index) {
-            return <h4 key={index}>{val}</h4>;
-          })}
-        </div>
         <div className="ButtonSend">
           <button type="submit" onClick={() => SendCall()}>
             Log in
@@ -117,6 +112,11 @@ function LoginPage() {
             value="Forgot password"
             onClick={() => navigate("/forgotpassword")}
           />
+        </div>
+        <div className="ErrorMessage">
+          {errorMessage.map(function (val, index) {
+            return <h4 key={index}>{val}</h4>;
+          })}
         </div>
       </div>
     </div>
