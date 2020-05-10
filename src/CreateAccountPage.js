@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./CreateAccountPage.css";
+import { navigate } from "@reach/router";
 
-function LoginPage() {
+function CreateAccountPage() {
   const [firstName, updateFirstName] = useState("", "");
   const [lastName, updateLastName] = useState("", "");
   const [emailAddress, updateEmailAddress] = useState("", "");
@@ -67,10 +68,12 @@ function LoginPage() {
         lastName: lastName,
         emailAddress: emailAddress,
         password: password,
+        confirmPassword: confirmPassword,
       })
       .then(function (response) {
         console.log(response);
         setErrorMessage([]);
+        navigate(-1);
       })
       .catch(function (error) {
         try {
@@ -187,4 +190,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default CreateAccountPage;
