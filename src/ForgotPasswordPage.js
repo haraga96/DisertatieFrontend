@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import "./ForgotPasswordPage.css";
 import { navigate } from "@reach/router";
+import Popup from "./Popup";
 
 function ForgotPasswordPage() {
   const [emailAddress, updateEmailAddress] = useState("", "");
+  const [popUpVisibility, updatePopUpVisibility] = useState("hidden", "hidden");
   const [errorMessage, setErrorMessage] = useState([], []);
 
   function EmailAddressChanged(value) {
@@ -16,6 +18,11 @@ function ForgotPasswordPage() {
     updateEmailAddress("");
   }
 
+  function ClosePopup() {
+    updatePopUpVisibility("hidden");
+    navigate(-1);
+  }
+
   async function SendCall() {
     const emailEntered = emailAddress;
     const axios = require("axios").default;
@@ -26,8 +33,8 @@ function ForgotPasswordPage() {
       })
       .then(function (response) {
         console.log(response);
+        updatePopUpVisibility("visible");
         setErrorMessage([]);
-        navigate(-1);
       })
       .catch(function (error) {
         try {
@@ -78,6 +85,12 @@ function ForgotPasswordPage() {
             return <h4 key={index}>{val}</h4>;
           })}
         </div>
+        <Popup
+          text="Email has been sent."
+          buttonText="Great"
+          isVisible={popUpVisibility}
+          closePopup={() => ClosePopup()}
+        />
       </div>
     </div>
   );

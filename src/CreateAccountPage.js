@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./CreateAccountPage.css";
+import Popup from "./Popup";
 import { navigate } from "@reach/router";
 
 function CreateAccountPage() {
@@ -8,6 +9,7 @@ function CreateAccountPage() {
   const [emailAddress, updateEmailAddress] = useState("", "");
   const [password, updatePassword] = useState("", "");
   const [confirmPassword, updateConfirmPassword] = useState("", "");
+  const [popUpVisibility, updatePopUpVisibility] = useState("hidden", "hidden");
   const [errorMessage, setErrorMessage] = useState([], []);
 
   function FirstNameChanged(value) {
@@ -60,6 +62,11 @@ function CreateAccountPage() {
     updateConfirmPassword("");
   }
 
+  function ClosePopup() {
+    updatePopUpVisibility("hidden");
+    navigate(-1);
+  }
+
   async function SendCall() {
     const axios = require("axios").default;
     await axios
@@ -73,7 +80,7 @@ function CreateAccountPage() {
       .then(function (response) {
         console.log(response);
         setErrorMessage([]);
-        navigate(-1);
+        updatePopUpVisibility("visible");
       })
       .catch(function (error) {
         try {
@@ -186,6 +193,12 @@ function CreateAccountPage() {
           })}
         </div>
       </div>
+      <Popup
+        text="Your account has been created successfully."
+        buttonText="Great"
+        isVisible={popUpVisibility}
+        closePopup={() => ClosePopup()}
+      />
     </div>
   );
 }

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import "./ResetPasswordPage.css";
 import { navigate } from "@reach/router";
+import Popup from "./Popup";
 
 function ResetPasswordPage() {
   const [emailAddress, updateEmailAddress] = useState("", "");
   const [oldPassword, updateOldPassword] = useState("", "");
   const [password, updatePassword] = useState("", "");
   const [confirmPassword, updateConfirmPassword] = useState("", "");
+  const [popUpVisibility, updatePopUpVisibility] = useState("hidden", "hidden");
   const [errorMessage, setErrorMessage] = useState([], []);
 
   function EmailAddressChanged(value) {
@@ -49,6 +51,11 @@ function ResetPasswordPage() {
     updateConfirmPassword("");
   }
 
+  function ClosePopup() {
+    updatePopUpVisibility("hidden");
+    navigate("/");
+  }
+
   async function SendCall() {
     const axios = require("axios").default;
 
@@ -61,7 +68,7 @@ function ResetPasswordPage() {
       })
       .then(function (response) {
         console.log(response);
-        navigate("/");
+        updatePopUpVisibility("visible");
         setErrorMessage([]);
       })
       .catch(function (error) {
@@ -160,6 +167,12 @@ function ResetPasswordPage() {
             return <h4 key={index}>{val}</h4>;
           })}
         </div>
+        <Popup
+          text="Your password has been changed."
+          buttonText="Great"
+          isVisible={popUpVisibility}
+          closePopup={() => ClosePopup()}
+        />
       </div>
     </div>
   );

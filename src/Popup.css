@@ -1,0 +1,53 @@
+@font-face {
+  font-family: Montserrat-Thin;
+  src: url("./fonts/Montserrat-Thin.ttf");
+}
+
+.popup {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0%;
+  right: 0%;
+  left: 0%;
+  bottom: 0%;
+  background-color: rgba(0, 0, 0, 0.9);
+  font-family: Montserrat-Thin;
+}
+.popup > .content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: auto;
+  height: 300px;
+  padding: 20px;
+  border-radius: 20px;
+  font-family: Montserrat-Thin;
+  background-color: rgb(66, 65, 65, 0.5);
+}
+
+.popup > .content > h1 {
+  color: white;
+  font-family: Montserrat-Thin;
+}
+
+.popup > .content > button {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  width: 340px;
+  height: 50px;
+  border-radius: 10px;
+  outline: none;
+  color: white;
+  border-width: 0px;
+  background-image: linear-gradient(
+    to left,
+    rgb(170, 70, 70),
+    rgb(182, 182, 95)
+  );
+  font-size: 15px;
+  font-family: Montserrat-Thin;
+}
