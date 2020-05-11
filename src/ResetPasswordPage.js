@@ -49,10 +49,10 @@ function ResetPasswordPage() {
     updateConfirmPassword("");
   }
 
-  function SendCall() {
+  async function SendCall() {
     const axios = require("axios").default;
 
-    axios
+    await axios
       .post("https://localhost:5001/api/users/reset", {
         emailAddress: emailAddress,
         oldPassword: oldPassword,
@@ -76,7 +76,7 @@ function ResetPasswordPage() {
             setErrorMessage(sentence);
           }
         } catch (Exception) {
-          setErrorMessage(["", "Something went wrong."]);
+          setErrorMessage(["Something went wrong."]);
         }
       });
   }

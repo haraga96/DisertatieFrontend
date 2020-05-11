@@ -16,11 +16,11 @@ function ForgotPasswordPage() {
     updateEmailAddress("");
   }
 
-  function SendCall() {
+  async function SendCall() {
     const emailEntered = emailAddress;
     const axios = require("axios").default;
 
-    axios
+    await axios
       .post("https://localhost:5001/api/users/forgot", {
         emailAddress: emailEntered,
       })
@@ -41,7 +41,7 @@ function ForgotPasswordPage() {
             setErrorMessage(sentence);
           }
         } catch (Exception) {
-          setErrorMessage(["", "Something went wrong."]);
+          setErrorMessage(["Something went wrong."]);
         }
       });
   }

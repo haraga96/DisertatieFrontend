@@ -26,12 +26,12 @@ function LoginPage() {
     updatePassword("");
   }
 
-  function SendCall() {
+  async function SendCall() {
     const emailEntered = emailAddress;
     const passwordEntered = password;
     const axios = require("axios").default;
 
-    axios
+    await axios
       .post("https://localhost:5001/api/users/login", {
         emailAddress: emailEntered,
         password: passwordEntered,
@@ -53,7 +53,7 @@ function LoginPage() {
             setErrorMessage(sentence);
           }
         } catch (Exception) {
-          setErrorMessage(["", "Something went wrong."]);
+          setErrorMessage(["Something went wrong."]);
         }
       });
   }
