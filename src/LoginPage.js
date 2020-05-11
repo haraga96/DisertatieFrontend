@@ -39,6 +39,7 @@ function LoginPage() {
       .then(function (response) {
         console.log(response);
         setErrorMessage([]);
+        navigate("/mainpage");
       })
       .catch(function (error) {
         try {

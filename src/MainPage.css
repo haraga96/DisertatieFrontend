@@ -1,0 +1,46 @@
+@font-face {
+  font-family: Montserrat-Regular;
+  src: url("./fonts/Montserrat-Regular.ttf");
+}
+
+.loggedInContainer {
+  width: auto;
+  height: auto;
+  min-width: 100px;
+  border-radius: 30px;
+  background-color: transparent;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+.loggedInContainer > .TitlePage {
+  display: flex;
+}
+
+.loggedInContainer > .TitlePage > h1 {
+  display: flex;
+  color: white;
+  margin: 40px;
+  font-size: 30px;
+  font-family: Montserrat-Thin;
+}
+
+.loggedInContainer > .ButtonBack > button {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  width: 340px;
+  height: 50px;
+  border-radius: 10px;
+  outline: none;
+  color: white;
+  border-width: 0px;
+  background-image: linear-gradient(
+    to left,
+    rgb(170, 70, 70),
+    rgb(182, 182, 95)
+  );
+  font-family: Montserrat-Regular;
+}

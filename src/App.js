@@ -5,6 +5,7 @@ import ForgotPasswordPage from "./ForgotPasswordPage";
 import CreateAccountPage from "./CreateAccountPage";
 import ResetPasswordPage from "./ResetPasswordPage";
 import NotFoundPage from "./NotFoundPage";
+import MainPage from "./MainPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <ForgotPasswordPage path="/forgotpassword" />
         <CreateAccountPage path="/createaccount" />
         <ResetPasswordPage path="/resetpassword" />
+        <MainPage path="/mainpage" />
         <NotFoundPage path="/notfound" default={true} />
       </Router>
     </div>
