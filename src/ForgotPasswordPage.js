@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./ForgotPasswordPage.css";
+import { navigate } from "@reach/router";
 
 function ForgotPasswordPage() {
   const [emailAddress, updateEmailAddress] = useState("", "");
@@ -26,6 +27,7 @@ function ForgotPasswordPage() {
       .then(function (response) {
         console.log(response);
         setErrorMessage([]);
+        navigate(-1);
       })
       .catch(function (error) {
         try {

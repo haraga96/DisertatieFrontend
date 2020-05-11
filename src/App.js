@@ -3,6 +3,8 @@ import { Router } from "@reach/router";
 import LoginPage from "./LoginPage";
 import ForgotPasswordPage from "./ForgotPasswordPage";
 import CreateAccountPage from "./CreateAccountPage";
+import ResetPasswordPage from "./ResetPasswordPage";
+import NotFoundPage from "./NotFoundPage";
 
 function App() {
   return (
@@ -11,6 +13,8 @@ function App() {
         <LoginPage path="/" />
         <ForgotPasswordPage path="/forgotpassword" />
         <CreateAccountPage path="/createaccount" />
+        <ResetPasswordPage path="/resetpassword" />
+        <NotFoundPage path="/notfound" default={true} />
       </Router>
     </div>
   );
