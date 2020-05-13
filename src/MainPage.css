@@ -3,8 +3,14 @@
   src: url("./fonts/Montserrat-Regular.ttf");
 }
 
-.loggedInContainer {
-  width: auto;
+@font-face {
+  font-family: Montserrat-Thin;
+  src: url("./fonts/Montserrat-Thin.ttf");
+}
+
+.mainPageContainer {
+  width: 600px;
+
   height: auto;
   min-width: 100px;
   border-radius: 30px;
@@ -15,23 +21,70 @@
   flex-direction: column;
 }
 
-.loggedInContainer > .TitlePage {
+.mainPageContainer > .UserInformation {
   display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid rgb(143, 142, 140);
+  border-radius: 10px;
+  min-width: 100px;
+  width: 450px;
+  flex-direction: row;
 }
 
-.loggedInContainer > .TitlePage > h1 {
+.mainPageContainer > .UserInformation > input {
   display: flex;
+  margin: 5px;
+  width: 275px;
+  height: 40px;
+  color: rgb(151, 151, 151);
+  padding: 5px;
+  background-color: transparent;
+  size: 10px;
+  outline: none;
+  font-family: Montserrat-Regular;
+  font-size: 13px;
+  border-width: 0px;
+  text-align: center;
+}
+
+.mainPageContainer > .UserInformation > h4 {
+  display: flex;
+  flex-direction: column;
   color: white;
-  margin: 40px;
-  font-size: 30px;
+  margin-left: 20px;
+  font-size: 15px;
+  font-family: Montserrat-Regular;
+}
+
+.mainPageContainer > .UserInformation > select {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 17px;
+  width: inherit;
+  height: auto;
+  border: none;
+  border-bottom: 0.5px solid rgb(143, 142, 140);
+  border-top: 0.5px solid rgb(143, 142, 140);
+  border-radius: 10px;
+  background-color: transparent;
+  outline: none;
   font-family: Montserrat-Thin;
 }
 
-.loggedInContainer > .ButtonBack > button {
+.mainPageContainer > .UserInformation > select > option {
+  display: flex;
+  text-align: center;
+}
+
+.mainPageContainer > .ButtonSend > button {
   display: flex;
   justify-content: center;
   margin-top: 20px;
-  width: 340px;
+  width: 440px;
   height: 50px;
   border-radius: 10px;
   outline: none;
