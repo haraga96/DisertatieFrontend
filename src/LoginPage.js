@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import "./LoginPage.css";
 
 import { navigate } from "@reach/router";
+import MainPage from "./MainPage";
 
-function LoginPage() {
+function LoginPage(props) {
   const [emailAddress, updateEmailAddress] = useState("", "");
   const [password, updatePassword] = useState("", "");
-  const [errorMessage, setErrorMessage] = useState([], []);
+  const [errorMessage, setErrorMessage] = useState([props.errorMessage], []);
+  const [isAuthenticated, updateIsAuthenticated] = useState(false, false);
 
   function EmailAddressChanged(value) {
     setErrorMessage([]);
@@ -36,10 +38,9 @@ function LoginPage() {
         emailAddress: emailEntered,
         password: passwordEntered,
       })
-      .then(function (response) {
-        console.log(response);
+      .then(function () {
         setErrorMessage([]);
-        navigate("/mainpage");
+        updateIsAuthenticated(true);
       })
       .catch(function (error) {
         try {
@@ -49,7 +50,6 @@ function LoginPage() {
             error.response.data !== null
           ) {
             var sentence = error.response.data.split("*");
-            console.log(sentence);
             setErrorMessage(sentence);
           }
         } catch (Exception) {
@@ -58,7 +58,9 @@ function LoginPage() {
       });
   }
 
-  return (
+  return isAuthenticated === true ? (
+    <MainPage />
+  ) : (
     <div>
       <div className="loginContainer">
         <div className="TitlePage">

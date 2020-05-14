@@ -1,37 +1,28 @@
 import React, { useState, useEffect } from "react";
 import "./MainPage.css";
 
-function MainPage() {
+function MainPage(props) {
   const [firstName] = useState("George Iulian", "");
   const [lastName] = useState("Haraga", "");
   const [emailAddress] = useState("haragageorgeiulian@gmail.com", "");
   const [countries, updateCountries] = useState([], []);
 
   useEffect(() => {
+    const axios = require("axios").default;
+    console.log(props.token);
     async function GetCountries() {
-      const axios = require("axios").default;
-
-      await axios
-        .get("https://localhost:5001/api/main/mainpage")
-        .then(function (response) {
-          console.log(response);
-          updateCountries(response.data);
-        })
-        .catch(function (error) {
-          try {
-            if (
-              error !== null &&
-              error.response !== null &&
-              error.response.data !== null
-            ) {
-              var sentence = error.response.data.split("*");
-              console.log(sentence);
-            }
-          } catch (Exception) {
-            console.log("catch");
-          }
-        });
+      if (countries.length === 0 && props.token !== null) {
+        await axios
+          .get("https://localhost:5001/api/main/mainpage", {
+            headers: { Authorization: `Bearer ${props.token}` },
+          })
+          .then(function (response) {
+            updateCountries(response.data);
+          })
+          .catch();
+      }
     }
+    GetCountries();
   });
 
   return (
@@ -52,19 +43,17 @@ function MainPage() {
         <div className="UserInformation">
           <h4>Country:</h4>
           <select>
-            <option>Romania</option>
-            <option>Spain</option>
-            <option>United Kingdom</option>
-            <option>Italy</option>
+            {countries.map((country) => {
+              return <option key={country.id}>{country.name}</option>;
+            })}
           </select>
         </div>
         <div className="UserInformation">
           <h4>Documents:</h4>
           <select>
-            <option>Masina</option>
-            <option>Casa</option>
-            <option>Teren</option>
-            <option>Bijuterii</option>
+            {countries.map((country) => {
+              return <option key={country.id}>{country.name}</option>;
+            })}
           </select>
         </div>
         <div className="ButtonSend">

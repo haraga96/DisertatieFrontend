@@ -97,3 +97,9 @@
   );
   font-family: Montserrat-Regular;
 }
+
+.notLoggedIn {
+  color: white;
+  font-family: Montserrat-Thin;
+  font-size: 30px;
+}

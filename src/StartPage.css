@@ -1,0 +1,150 @@
+@font-face {
+  font-family: Montserrat-Regular;
+  src: url("./fonts/Montserrat-Regular.ttf");
+}
+
+@font-face {
+  font-family: Montserrat-Bold;
+  src: url("./fonts/Montserrat-Bold.ttf");
+}
+
+@font-face {
+  font-family: Montserrat-Italic;
+  src: url("./fonts/Montserrat-Italic.ttf");
+}
+
+@font-face {
+  font-family: Montserrat-Thin;
+  src: url("./fonts/Montserrat-Thin.ttf");
+}
+
+.loginContainer {
+  width: auto;
+  height: auto;
+  min-width: 100px;
+  border-radius: 30px;
+  background-color: transparent;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+::placeholder {
+  color: rgb(143, 142, 140);
+  opacity: 1;
+}
+
+span {
+  background-image: linear-gradient(
+    to right,
+    rgb(170, 70, 70),
+    rgb(182, 182, 95)
+  );
+  font-family: Montserrat-Italic;
+  border-radius: 10px;
+}
+
+.loginContainer > .TitlePage {
+  display: flex;
+}
+
+.loginContainer > .TitlePage > h1 {
+  display: flex;
+  color: white;
+  margin: 40px;
+  font-size: 30px;
+  font-family: Montserrat-Thin;
+}
+
+.loginContainer > .LoginInputs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid rgb(143, 142, 140);
+  border-radius: 10px;
+  min-width: 100px;
+  width: 340px;
+}
+
+.loginContainer > .LoginInputs > input {
+  display: flex;
+  margin: 5px;
+  width: 275px;
+  height: 40px;
+  color: white;
+  padding: 5px;
+  background-color: transparent;
+  size: 10px;
+  outline: none;
+  font-family: Montserrat-Regular;
+  font-size: 13px;
+  border-width: 0px;
+}
+
+.loginContainer > .ErrorMessage {
+  width: 340px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-left: 10px;
+  font-family: Montserrat-Thin;
+  color: rgb(255, 111, 111);
+  font-size: 14px;
+  max-width: 340px;
+  word-wrap: break-word;
+}
+
+.loginContainer > .ErrorMessage > h4 {
+  display: flex;
+  margin-top: 5px;
+}
+
+.loginContainer > .ButtonSend > button {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  width: 340px;
+  height: 50px;
+  border-radius: 10px;
+  outline: none;
+  color: white;
+  border-width: 0px;
+  background-image: linear-gradient(
+    to left,
+    rgb(170, 70, 70),
+    rgb(182, 182, 95)
+  );
+  font-family: Montserrat-Regular;
+}
+
+.loginContainer > .CreationAndForgot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.loginContainer > .CreationAndForgot > input {
+  display: flex;
+  justify-content: center;
+  width: 160px;
+  margin: 10px;
+  height: 50px;
+  border-radius: 10px;
+  outline: none;
+  border-width: 0px;
+  background-color: transparent;
+  color: rgb(182, 182, 95);
+  font-size: 12px;
+  font-family: Montserrat-Regular;
+  border: 1px solid rgb(182, 182, 95);
+}
+
+.loginContainer > div > .ClearImage {
+  display: flex;
+  width: 15px;
+  height: 15px;
+  padding-right: 10px;
+}
