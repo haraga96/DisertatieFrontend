@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Popup from "./Popup";
 import "./MainPage.css";
 
 function MainPage(props) {
@@ -7,6 +8,8 @@ function MainPage(props) {
   const [emailAddress, setEmailAddress] = useState("", "");
   const [documents, updateDocuments] = useState([], []);
   const [oneTimeCall, updateOneTimeCall] = useState(false, false);
+  const [popUpVisibility, updatePopUpVisibility] = useState("hidden", "hidden");
+  const [errorMessage, setErrorMessage] = useState("", "");
 
   useEffect(() => {
     const axios = require("axios").default;
@@ -23,7 +26,9 @@ function MainPage(props) {
             setLastName(response.data.lastName);
             setEmailAddress(response.data.emailAddress);
           })
-          .catch();
+          .catch(function () {
+            setErrorMessage("*Something went wrong.");
+          });
       }
     }
 
@@ -69,6 +74,7 @@ function MainPage(props) {
   }
 
   async function LogOut() {
+    setErrorMessage("");
     if (props.token !== null) {
       const requestOptions = {
         method: "POST",
@@ -80,6 +86,7 @@ function MainPage(props) {
 
   async function Compute() {
     const axios = require("axios").default;
+    setErrorMessage("");
     await axios
       .get("https://localhost:5001/api/compute/sendsum", {
         headers: { Authorization: `Bearer ${props.token}` },
@@ -87,8 +94,16 @@ function MainPage(props) {
           emailAddress: emailAddress,
         },
       })
-      .then()
-      .catch();
+      .then(function () {
+        updatePopUpVisibility("visible");
+      })
+      .catch(function () {
+        setErrorMessage("*Something went wrong.");
+      });
+  }
+
+  function ClosePopup() {
+    updatePopUpVisibility("hidden");
   }
 
   return (
@@ -129,6 +144,15 @@ function MainPage(props) {
             Log out
           </button>
         </div>
+        <div className="ErrorMessage">
+          <h4>{errorMessage}</h4>
+        </div>
+        <Popup
+          text="Email has been sent."
+          buttonText="Great"
+          isVisible={popUpVisibility}
+          closePopup={() => ClosePopup()}
+        />
       </div>
     </div>
   );

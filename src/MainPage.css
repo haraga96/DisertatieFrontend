@@ -104,3 +104,22 @@
   font-family: Montserrat-Thin;
   font-size: 30px;
 }
+
+.mainPageContainer > .ErrorMessage {
+  width: 440px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-left: 10px;
+  font-family: Montserrat-Thin;
+  color: rgb(211, 77, 77);
+  font-size: 14px;
+  max-width: 440px;
+  word-wrap: break-word;
+}
+
+.mainPageContainer > .ErrorMessage > h4 {
+  display: flex;
+  margin-top: 5px;
+}
