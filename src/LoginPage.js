@@ -9,6 +9,7 @@ function LoginPage(props) {
   const [password, updatePassword] = useState("", "");
   const [errorMessage, setErrorMessage] = useState([props.errorMessage], []);
   const [isAuthenticated, updateIsAuthenticated] = useState(false, false);
+  const [token, setToken] = useState("", "");
 
   function EmailAddressChanged(value) {
     setErrorMessage([]);
@@ -38,8 +39,9 @@ function LoginPage(props) {
         emailAddress: emailEntered,
         password: passwordEntered,
       })
-      .then(function () {
+      .then(function (response) {
         setErrorMessage([]);
+        setToken(response.data);
         updateIsAuthenticated(true);
       })
       .catch(function (error) {
@@ -59,7 +61,7 @@ function LoginPage(props) {
   }
 
   return isAuthenticated === true ? (
-    <MainPage />
+    <MainPage token={token} />
   ) : (
     <div>
       <div className="loginContainer">

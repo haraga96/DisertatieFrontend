@@ -36,6 +36,7 @@
 .popup > .content > button {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-top: 20px;
   width: 340px;
   height: 50px;

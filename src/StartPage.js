@@ -16,12 +16,12 @@ function StartPage() {
       .get("https://localhost:5001/api/users/checkstatus")
       .then(function (response) {
         updateOneTimeCall(true);
+        updateToken(response.data);
         if (response.status === 204) {
           updateIsAuthenticated(false);
         } else {
           updateIsAuthenticated(true);
         }
-        updateToken(response.data);
       })
       .catch(function (error) {
         try {
