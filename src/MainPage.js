@@ -10,10 +10,10 @@ function MainPage(props) {
 
   useEffect(() => {
     const axios = require("axios").default;
-    async function GetInfos() {
+    async function GetInfosUser() {
       if (props.token !== null) {
         await axios
-          .get("https://localhost:5001/api/main/mainpage", {
+          .get("https://localhost:5001/api/main/mainpageuser", {
             headers: { Authorization: `Bearer ${props.token}` },
           })
           .then(function (response) {
@@ -22,15 +22,74 @@ function MainPage(props) {
             setFirstName(response.data.firstName);
             setLastName(response.data.lastName);
             setEmailAddress(response.data.emailAddress);
-            updateDocuments(response.data.documents);
           })
           .catch();
       }
     }
+
+    async function GetInfosDocuments() {
+      if (props.token !== null) {
+        const requestOptions = {
+          method: "GET",
+          headers: { Authorization: `Bearer ${props.token}` },
+        };
+        const response = await fetch(
+          "https://localhost:5001/api/documents/infos",
+          requestOptions
+        );
+        const data = await response.json();
+        console.log(data);
+        updateOneTimeCall(true);
+        updateDocuments(data);
+      }
+    }
     if (oneTimeCall === false) {
-      GetInfos();
+      GetInfosUser();
+      GetInfosDocuments();
     }
   });
+
+  function CheckType(id) {
+    switch (id) {
+      case 1:
+        return "Romania";
+      case 2:
+        return "United Kingdom";
+      case 3:
+        return "Italy";
+      case 4:
+        return "Spain";
+      case 5:
+        return "Austria";
+      case 6:
+        return "France";
+      default:
+        return id;
+    }
+  }
+
+  async function LogOut() {
+    if (props.token !== null) {
+      const requestOptions = {
+        method: "POST",
+      };
+      await fetch("https://localhost:5001/api/users/logout", requestOptions);
+    }
+    window.location.reload(true);
+  }
+
+  async function Compute() {
+    const axios = require("axios").default;
+    await axios
+      .get("https://localhost:5001/api/compute/sendsum", {
+        headers: { Authorization: `Bearer ${props.token}` },
+        params: {
+          emailAddress: emailAddress,
+        },
+      })
+      .then()
+      .catch();
+  }
 
   return (
     <div>
@@ -47,24 +106,28 @@ function MainPage(props) {
           <h4>Email address:</h4>
           <input value={emailAddress} readOnly />
         </div>
-        {/* <div className="UserInformation">
-          <h4>Country:</h4>
-          <select>
-            {documents.map((country) => {
-              return <option key={country.id}>{country.name}</option>;
-            })}
-          </select>
-        </div> */}
         <div className="UserInformation">
           <h4>Documents:</h4>
           <select>
             {documents.map((document) => {
-              return <option key={document.id}>{document.name}</option>;
+              return (
+                <option key={document.id}>
+                  {document.name}, {document.valueDue} lei,{" "}
+                  {CheckType(document.countryId)}
+                </option>
+              );
             })}
           </select>
         </div>
         <div className="ButtonSend">
-          <button type="submit">Calculate</button>
+          <button type="submit" onClick={() => Compute()}>
+            Calculate
+          </button>
+        </div>
+        <div className="ButtonSend">
+          <button type="submit" onClick={() => LogOut()}>
+            Log out
+          </button>
         </div>
       </div>
     </div>

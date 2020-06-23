@@ -7,7 +7,7 @@ function StartPage() {
   const [errorMessage, setErrorMessage] = useState([], []);
   const [isAuthenticated, updateIsAuthenticated] = useState(false, false);
   const [token, updateToken] = useState("", "");
-  const [oneTimeCall, updateOneTimeCall] = useState(false, false);
+  //const [oneTimeCall, updateOneTimeCall] = useState(false, false);
 
   async function SendCall() {
     const axios = require("axios").default;
@@ -15,7 +15,7 @@ function StartPage() {
     await axios
       .get("https://localhost:5001/api/users/checkstatus")
       .then(function (response) {
-        updateOneTimeCall(true);
+        //updateOneTimeCall(true);
         updateToken(response.data);
         if (response.status === 204) {
           updateIsAuthenticated(false);
@@ -32,21 +32,19 @@ function StartPage() {
           ) {
             var sentence = error.response.data.split("*");
             updateIsAuthenticated(false);
-            updateOneTimeCall(true);
+            //updateOneTimeCall(true);
             setErrorMessage(sentence);
           }
         } catch (Exception) {
           updateIsAuthenticated(false);
-          updateOneTimeCall(true);
+          //updateOneTimeCall(true);
           setErrorMessage(["Something went wrong. Try again later."]);
         }
       });
   }
 
   useEffect(() => {
-    if (oneTimeCall === false) {
-      SendCall();
-    }
+    SendCall();
   });
 
   return isAuthenticated === false ? (
